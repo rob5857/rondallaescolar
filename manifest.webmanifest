@@ -1,0 +1,13 @@
+{
+  "name": "Rondalla Escolar José N. Colón González",
+  "short_name": "Rondalla",
+  "description": "Nuestra música, nuestras raíces, nuestro futuro.",
+  "lang": "es-PR",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0d0b08",
+  "theme_color": "#0d0b08",
+  "icons": [
+    { "src": "assets/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" }
+  ]
+}

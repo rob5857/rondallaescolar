@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es-PR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contacto — Rondalla Escolar José N. Colón González</title>
+  <meta name="description" content="Invita a la Rondalla Escolar José N. Colón González a tu actividad, propón una colaboración o envía una consulta.">
+  <meta name="theme-color" content="#0d0b08">
+  <link rel="icon" href="assets/logo-192.png" type="image/png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="contacto">
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <div id="cabecera"></div>
+  <noscript><p style="padding:12px 16px"><a href="index.html">Inicio</a> · <a href="rondalla.html">Nuestra rondalla</a> · <a href="eventos.html">Eventos</a> · <a href="galeria.html">Galería</a> · <a href="apoyanos.html">Apóyanos</a></p></noscript>
+
+  <main id="contenido">
+    <div class="pagina-cabeza"><div class="contenedor">
+      <p class="antetitulo">Invítanos · Contacto</p>
+      <h1>Hablemos</h1>
+      <p>Invitaciones a presentaciones, auspicios, donaciones en especie y consultas de la comunidad.</p>
+    </div></div>
+
+    <section class="seccion">
+      <div class="contenedor rejilla-2" style="align-items:start">
+        <form class="tarjeta" id="form-contacto">
+          <div class="campo">
+            <label for="tipo">¿En qué podemos ayudarte?</label>
+            <select id="tipo" name="tipo">
+              <option value="invitacion">Invitar a la rondalla a una actividad</option>
+              <option value="auspicio">Ser auspiciador</option>
+              <option value="donacion">Donación o aportación en especie</option>
+              <option value="consulta">Consulta general</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="nombre">Nombre u organización</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" autocomplete="email" required>
+          </div>
+          <div class="campo" id="campo-fecha">
+            <label for="fecha">Fecha propuesta de la actividad</label>
+            <input type="date" id="fecha" name="fecha">
+          </div>
+          <div class="campo">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos los detalles: lugar, tipo de actividad, público…"></textarea>
+          </div>
+          <button class="btn btn-oro" type="submit">Enviar mensaje</button>
+          <p class="estado-form" id="estado-contacto" role="status" hidden></p>
+          <p class="nota" style="margin-top:14px">Por favor, no incluyas información personal de estudiantes. Usaremos tus datos solo para responderte.</p>
+        </form>
+
+        <div>
+          <h2>Antes de escribir</h2>
+          <ul class="valores" style="grid-template-columns:1fr">
+            <li><b>Invitaciones</b>Indica fecha, hora, lugar y tipo de actividad. Las presentaciones dependen del calendario escolar y de la aprobación de la escuela.</li>
+            <li><b>Auspicios</b>Cuéntanos sobre tu comercio y el nivel que te interesa. Te enviaremos el acuerdo propuesto.</li>
+            <li><b>En especie</b>Describe lo que deseas donar: instrumentos, cuerdas, estuches, mantenimiento o transporte.</li>
+            <li><b>Exalumnos</b>¿Fuiste parte de la rondalla? Queremos conocer tu historia y tus fotos.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="pie"></div>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es-PR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Apóyanos — Rondalla Escolar José N. Colón González</title>
+  <meta name="description" content="Apoya a la Rondalla Escolar José N. Colón González con una aportación, una donación en especie o como auspiciador.">
+  <meta name="theme-color" content="#0d0b08">
+  <link rel="icon" href="assets/logo-192.png" type="image/png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="apoyanos">
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <div id="cabecera"></div>
+  <noscript><p style="padding:12px 16px"><a href="index.html">Inicio</a> · <a href="rondalla.html">Nuestra rondalla</a> · <a href="eventos.html">Eventos</a> · <a href="galeria.html">Galería</a> · <a href="contacto.html">Contacto</a></p></noscript>
+
+  <main id="contenido">
+    <div class="pagina-cabeza"><div class="contenedor">
+      <p class="antetitulo">Apóyanos</p>
+      <h1>Tu apoyo mantiene la música sonando</h1>
+      <p>Primero te contamos qué necesitamos y a dónde va cada aportación. Después, tú decides cómo ayudar.</p>
+    </div></div>
+
+    <!-- Campaña activa -->
+    <section class="seccion seccion-oscura" style="border-top:1px solid #3a2f12">
+      <div class="contenedor" data-campana="completa"></div>
+    </section>
+
+    <!-- Donar -->
+    <section class="seccion" id="donar">
+      <div class="contenedor rejilla-2" style="align-items:start">
+        <div>
+          <p class="antetitulo">Aportación económica</p>
+          <h2>Elige tu aportación</h2>
+          <form class="tarjeta" id="form-donar" novalidate>
+            <fieldset class="fichas">
+              <legend>Frecuencia</legend>
+              <label><input type="radio" name="frecuencia" value="unica" checked><span>Una vez</span></label>
+              <label><input type="radio" name="frecuencia" value="mensual"><span>Mensual</span></label>
+            </fieldset>
+            <p class="nota" id="nota-mensual" hidden>La aportación mensual estará disponible próximamente.</p>
+            <fieldset class="fichas">
+              <legend>Monto</legend>
+              <label><input type="radio" name="monto" value="10"><span>$10</span></label>
+              <label><input type="radio" name="monto" value="25" checked><span>$25</span></label>
+              <label><input type="radio" name="monto" value="50"><span>$50</span></label>
+              <label><input type="radio" name="monto" value="100"><span>$100</span></label>
+              <label><input type="radio" name="monto" value="otro"><span>Otro</span></label>
+            </fieldset>
+            <div class="campo" id="campo-otro" hidden>
+              <label for="monto-otro">Otro monto (en dólares)</label>
+              <input type="number" id="monto-otro" min="1" step="1" inputmode="numeric" placeholder="Ej. 40">
+            </div>
+            <p id="resumen-donacion" aria-live="polite" style="font-weight:600"></p>
+            <button class="btn btn-oro" type="submit" style="width:100%">Continuar al pago seguro</button>
+            <p class="nota" style="margin-top:14px">El pago se completa en la página segura del procesador. Este sitio no almacena números de tarjeta. Tu nombre solo se publicará si lo autorizas.</p>
+          </form>
+        </div>
+
+        <div>
+          <p class="antetitulo">Así funciona</p>
+          <h2>Del gesto al resultado</h2>
+          <ol class="pasos" style="margin-bottom:36px">
+            <li>Conoces la necesidad.</li>
+            <li>Eliges tu aportación.</li>
+            <li>Pagas en una página segura.</li>
+            <li>Recibes tu confirmación.</li>
+            <li>Sigues el avance de la campaña.</li>
+          </ol>
+          <div class="tarjeta" id="especie">
+            <h3>Donaciones en especie</h3>
+            <p>También puedes ayudar con instrumentos, cuerdas, estuches, mantenimiento, transportación, sonido, meriendas o camisas y uniformes para los integrantes.</p>
+            <a class="btn btn-oscuro btn-chico" href="contacto.html?tipo=donacion">Ofrecer una donación en especie</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Auspiciadores -->
+    <section class="seccion" id="auspiciadores" style="padding-top:0">
+      <div class="contenedor">
+        <p class="antetitulo">Programa de auspiciadores</p>
+        <h2>Círculo de Amigos de la Rondalla</h2>
+        <p class="entradilla">Acuerdos por año escolar para comercios y organizaciones que quieren acompañar a nuestros estudiantes. Reconocemos tu apoyo de forma visible y sencilla.</p>
+        <div class="rejilla" style="margin-top:28px">
+          <article class="tarjeta nivel revela"><h3>Amigo de la Rondalla</h3><p class="precio">$150</p><p>Nombre comercial en el directorio y agradecimiento digital.</p></article>
+          <article class="tarjeta nivel revela"><h3>Auspiciador Bronce</h3><p class="precio">$300</p><p>Logotipo, enlace y descripción breve del negocio.</p></article>
+          <article class="tarjeta nivel revela"><h3>Auspiciador Plata</h3><p class="precio">$600</p><p>Todo lo anterior y presencia en una sección destacada rotativa.</p></article>
+          <article class="tarjeta nivel oro revela"><h3>Auspiciador Oro</h3><p class="precio">$1,200</p><p>Todo lo anterior y reconocimiento en una actividad acordada.</p></article>
+          <article class="tarjeta nivel revela"><h3>Colaborador en especie</h3><p class="precio" style="font-size:1.3rem">Según aportación documentada</p><p>Reconocimiento proporcional aprobado por la escuela.</p></article>
+        </div>
+        <p class="nota" style="margin-top:18px">Aportaciones por año escolar, sujetas a acuerdo con la escuela. Cada acuerdo indica vigencia, ubicaciones del reconocimiento, uso autorizado del logotipo y condiciones de renovación. El programa ofrece reconocimiento, no publicidad: no se prometen ventas ni cantidades de visitantes, y los auspiciadores no reciben información de estudiantes o familias. La escuela aprueba los comercios y contenidos admitidos.</p>
+        <a class="btn btn-oro" href="contacto.html?tipo=auspicio" style="margin-top:8px">Quiero ser auspiciador</a>
+
+        <h3 style="margin-top:56px;font-size:1.6rem">Directorio de auspiciadores</h3>
+        <div class="rejilla" id="directorio-aus" style="margin-top:18px"></div>
+      </div>
+    </section>
+
+    <!-- Transparencia -->
+    <section class="seccion" id="transparencia" style="padding-top:0">
+      <div class="contenedor">
+        <p class="antetitulo">Transparencia</p>
+        <h2>Cuentas claras</h2>
+        <p class="entradilla">Publicaremos de forma resumida cuánto se recauda y en qué se utiliza, campaña por campaña.</p>
+        <div id="tabla-transparencia" style="margin-top:24px"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="pie"></div>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es-PR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rondalla Escolar José N. Colón González — Nuestra música, nuestras raíces, nuestro futuro</title>
+  <meta name="description" content="Conoce a la Rondalla Escolar José N. Colón González: presentaciones, galería y formas de apoyar la formación musical y cultural de nuestros estudiantes.">
+  <meta name="theme-color" content="#0d0b08">
+  <meta property="og:title" content="Rondalla Escolar José N. Colón González">
+  <meta property="og:description" content="Nuestra música, nuestras raíces, nuestro futuro.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/logo-192.png" type="image/png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="inicio">
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <div id="cabecera"></div>
+  <noscript><p style="padding:12px 16px"><a href="rondalla.html">Nuestra rondalla</a> · <a href="eventos.html">Eventos</a> · <a href="galeria.html">Galería</a> · <a href="apoyanos.html">Apóyanos</a> · <a href="contacto.html">Contacto</a></p></noscript>
+
+  <main id="contenido">
+    <!-- Bienvenida -->
+    <section class="hero" aria-labelledby="titulo-portada">
+      <div class="hero-fotos" id="hero-fotos"></div>
+      <div class="hero-velo"></div>
+      <svg class="hero-cuerdas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div class="contenedor hero-rejilla">
+        <div class="hero-logo"><img src="assets/logo.png" width="640" height="640" alt="Emblema de la Rondalla Escolar, Escuela S.U. José N. Colón González: «Educando para alcanzar la excelencia»"></div>
+        <div class="hero-contenido">
+          <p class="antetitulo">Rondalla Escolar</p>
+          <h1 id="titulo-portada">José N. <em>Colón González</em></h1>
+          <p class="lema">Nuestra música, nuestras raíces, nuestro futuro.</p>
+          <p class="intro">En cada cuerda y cada ritmo compartimos el amor por nuestra cultura. Conoce a la Rondalla Escolar José N. Colón González y acompáñanos a cultivar talento, disciplina y comunidad a través de la música.</p>
+          <div class="botones">
+            <a class="btn btn-oro" href="eventos.html">Ver presentaciones</a>
+            <a class="btn btn-linea" href="apoyanos.html#donar">Apoyar la rondalla</a>
+            <a class="btn btn-linea" href="apoyanos.html#auspiciadores">Ser auspiciador</a>
+          </div>
+          <div class="hero-sonido">
+            <button type="button" class="btn btn-linea btn-chico" id="btn-sonido" aria-pressed="false">🔈 Activar sonido</button>
+            <button type="button" class="btn btn-linea btn-chico" id="btn-rasguear">Rasguear</button>
+            <span>Pasa el cursor o desliza el dedo sobre las cuerdas.</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-puntos" id="hero-puntos" role="group" aria-label="Fotos de la portada"></div>
+    </section>
+
+    <!-- Escúchanos + Próxima presentación -->
+    <section class="seccion seccion-oscura" style="border-top:1px solid #3a2f12">
+      <div class="contenedor rejilla-2" style="align-items:start">
+        <div class="revela">
+          <p class="antetitulo">Escúchanos</p>
+          <h2 style="margin-bottom:18px">Una interpretación destacada</h2>
+          <div id="audio-destacado"></div>
+        </div>
+        <div class="revela">
+          <p class="antetitulo">Próxima presentación</p>
+          <div class="proxima" id="proxima"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nuestra esencia -->
+    <section class="seccion">
+      <div class="contenedor rejilla-2">
+        <div class="revela">
+          <p class="antetitulo">Nuestra esencia</p>
+          <h2>Aprender música es aprender a escucharnos</h2>
+          <p class="entradilla">La rondalla es un espacio donde los estudiantes descubren las tradiciones musicales de Puerto Rico tocando juntos. Cada ensayo cultiva disciplina, colaboración y orgullo por lo nuestro.</p>
+          <a class="btn btn-oscuro" href="rondalla.html">Conoce nuestra rondalla</a>
+        </div>
+        <blockquote class="cita tarjeta revela">
+          «Fomentar el desarrollo musical, cultural y humano de nuestros estudiantes mediante la interpretación colectiva.»
+          <footer class="nota" style="font-style:normal;margin-top:14px;font-family:var(--cuerpo)">De nuestra misión</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Nuestros instrumentos -->
+    <section class="seccion" style="padding-top:0">
+      <div class="contenedor">
+        <div class="cabecera-seccion">
+          <div><p class="antetitulo">Nuestros instrumentos</p><h2>Las voces de la rondalla</h2></div>
+          <a class="btn btn-linea btn-chico" href="rondalla.html#instrumentos">Tócalos tú mismo</a>
+        </div>
+        <div class="rejilla" data-instrumentos="compacto"></div>
+      </div>
+    </section>
+
+    <!-- Momentos recientes -->
+    <section class="seccion" style="padding-top:0">
+      <div class="contenedor">
+        <div class="cabecera-seccion">
+          <div><p class="antetitulo">Momentos recientes</p><h2>Lo que hemos vivido</h2></div>
+          <a class="btn btn-linea btn-chico" href="galeria.html">Ver la galería</a>
+        </div>
+        <div class="mosaico revela" id="momentos"></div>
+      </div>
+    </section>
+
+    <!-- Una necesidad concreta -->
+    <section class="seccion seccion-oscura">
+      <div class="contenedor revela" data-campana="resumen"></div>
+    </section>
+
+    <!-- Auspiciadores -->
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="cabecera-seccion">
+          <div><p class="antetitulo">Círculo de Amigos de la Rondalla</p><h2>Gracias a nuestros auspiciadores</h2></div>
+          <a class="btn btn-linea btn-chico" href="apoyanos.html#auspiciadores">Ver el directorio</a>
+        </div>
+        <div class="rejilla revela" id="logos-aus" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))"></div>
+      </div>
+    </section>
+
+    <!-- Contacto institucional -->
+    <section class="seccion" style="padding-top:0">
+      <div class="contenedor">
+        <div class="tarjeta revela" style="text-align:center;padding:clamp(28px,6vw,56px)">
+          <h2>¿Quieres que la rondalla toque en tu actividad?</h2>
+          <p class="entradilla" style="margin-inline:auto">Recibimos invitaciones, propuestas de colaboración y consultas de la comunidad.</p>
+          <a class="btn btn-oro" href="contacto.html?tipo=invitacion">Invítanos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="pie"></div>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
