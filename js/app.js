@@ -439,24 +439,119 @@
 
   /* ---------- Campaña ---------- */
   const dinero = (n) => new Intl.NumberFormat("es-PR", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+  const fechaLarga = (iso) => new Intl.DateTimeFormat("es-PR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso + "T12:00:00Z"));
+
+  // Meta y aportaciones: js/campana.js (publicado) o, si es más reciente,
+  // lo guardado desde panel.html en este dispositivo (vista previa).
+  let cartel = window.RONDALLA_CAMPANA || null, vistaPrevia = false;
+  try {
+    const local = JSON.parse(localStorage.getItem("rondalla-campana"));
+    if (local && (!cartel || String(local.actualizado) > String(cartel.actualizado))) { cartel = local; vistaPrevia = true; }
+  } catch { /* sin almacenamiento local */ }
+  if (cartel && D.campana) {
+    cartel.donaciones = (cartel.donaciones || []).filter((d) => Number(d.monto) > 0);
+    D.campana.meta = Number(cartel.meta) || null;
+    D.campana.recaudado = cartel.donaciones.reduce((s, d) => s + Number(d.monto), 0);
+    if (cartel.fecha) D.campana.fechaLimite = fechaLarga(cartel.fecha);
+  }
+  let previsualiza = () => {};
+
+  const pintaCartelera = (c) => {
+    const meta = c.meta, rec = c.recaudado || 0;
+    const p = Math.min(100, Math.round((rec / meta) * 100));
+    const falta = Math.max(0, meta - rec);
+    const dias = cartel.fecha ? Math.ceil((new Date(cartel.fecha + "T08:00:00-04:00") - Date.now()) / 864e5) : null;
+    const recientes = cartel.donaciones.slice(-5).reverse();
+    return `
+      <div class="cartelera${p >= 100 ? " lograda" : ""}" id="cartelera">
+        ${vistaPrevia ? '<p class="cartelera-previa" role="note">Vista previa en este dispositivo. Publica js/campana.js desde el panel para que todos vean estos números.</p>' : ""}
+        <p class="cartelera-rotulo">Meta de campaña${cartel.nombre ? " · " + esc(cartel.nombre) : ""}</p>
+        ${cartel.fecha ? `<p class="cartelera-fecha">${fechaLarga(cartel.fecha)}</p>` : ""}
+        <p class="cartelera-cifra"><span class="cartelera-num" data-valor="${rec}">${dinero(movimientoReducido ? rec : 0)}</span>
+          <span class="cartelera-de">recaudados de <b>${dinero(meta)}</b></span></p>
+        <div class="cartelera-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="Avance hacia la meta de ${dinero(meta)}">
+          <i class="lleno"></i><i class="fantasma"></i>
+          <span class="hito" style="left:25%"></span><span class="hito" style="left:50%"></span><span class="hito" style="left:75%"></span>
+        </div>
+        <div class="cartelera-datos">
+          <div><b data-cuenta="${p}" data-sufijo="%">${movimientoReducido ? p : 0}%</b><span>de la meta</span></div>
+          <div><b>${p >= 100 ? "¡Lograda!" : dinero(falta)}</b><span>${p >= 100 ? "gracias a ti" : "faltan"}</span></div>
+          <div><b>${cartel.donaciones.length}</b><span>${cartel.donaciones.length === 1 ? "aportación" : "aportaciones"}</span></div>
+          ${dias !== null ? `<div><b>${dias > 0 ? dias : dias === 0 ? "¡Hoy!" : "✓"}</b><span>${dias > 0 ? (dias === 1 ? "día para la parranda" : "días para la parranda") : dias === 0 ? "es la parranda" : "actividad realizada"}</span></div>` : ""}
+        </div>
+        ${p < 100 ? `<div class="cartelera-prueba">
+          <p>Toca un monto y mira cuánto acerca la meta:</p>
+          <div class="cartelera-fichas">${[10, 25, 50, 100].map((m) => `<button type="button" data-prueba="${m}">${dinero(m)}</button>`).join("")}</div>
+          <p class="cartelera-msg" aria-live="polite">Cada aportación mueve la barra.</p>
+        </div>` : '<p class="cartelera-msg">¡Meta alcanzada! Gracias a cada persona que aportó.</p>'}
+        <a class="btn btn-oro" href="#donar">Aportar a la meta</a>
+        ${recientes.length ? `<ul class="cartelera-lista" aria-label="Aportaciones recientes">${recientes.map((d) => `<li><b>${dinero(Number(d.monto))}</b> ${esc(d.nombre || "Aportación anónima")}</li>`).join("")}</ul>` : ""}
+        <p class="cartelera-pie">El total se actualiza cuando el comité registra cada aportación recibida${cartel.actualizado ? " · Actualizado el " + new Intl.DateTimeFormat("es-PR", { day: "numeric", month: "long", timeZone: "America/Puerto_Rico" }).format(new Date(cartel.actualizado)) : ""}.</p>
+      </div>`;
+  };
+
+  const activaCartelera = (caja, c) => {
+    const el = $("#cartelera", caja); if (!el) return;
+    const meta = c.meta, rec = c.recaudado || 0;
+    const p = Math.min(100, (rec / meta) * 100);
+    const num = $(".cartelera-num", el), pct = $("[data-cuenta]", el), msg = $(".cartelera-msg", el);
+    const arranca = () => {
+      el.style.setProperty("--p", p + "%");
+      if (movimientoReducido) return;
+      const t0 = performance.now(), dur = 1600;
+      const paso = (t) => {
+        const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        num.textContent = dinero(Math.round(rec * e));
+        pct.textContent = Math.round(p * e) + "%";
+        if (k < 1) requestAnimationFrame(paso);
+      };
+      requestAnimationFrame(paso);
+    };
+    if ("IntersectionObserver" in window) {
+      const ojo = new IntersectionObserver((v) => { if (v.some((x) => x.isIntersecting)) { ojo.disconnect(); arranca(); } }, { threshold: .3 });
+      ojo.observe(el);
+    } else arranca();
+
+    previsualiza = (m) => {
+      if (p >= 100 || !msg) return;
+      m = Math.max(0, Number(m) || 0);
+      const nuevo = Math.min(100, ((rec + m) / meta) * 100);
+      el.style.setProperty("--g", (nuevo - p) + "%");
+      $$("[data-prueba]", el).forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.prueba) === m)));
+      if (!m) { msg.textContent = "Cada aportación mueve la barra."; return; }
+      msg.textContent = rec + m >= meta
+        ? `Con ${dinero(m)} ¡se completa la meta!`
+        : `Con ${dinero(m)} llegaríamos a ${dinero(rec + m)}: el ${Math.round(nuevo)}% de la meta.`;
+    };
+    el.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-prueba]"); if (!b) return;
+      const f = $("#form-donar"), radio = f && $(`input[name="monto"][value="${b.dataset.prueba}"]`, f);
+      if (radio) { radio.checked = true; f.dispatchEvent(new Event("input")); }
+      else previsualiza(b.dataset.prueba);
+    });
+  };
+
   $$("[data-campana]").forEach((caja) => {
     const c = D.campana; if (!c) { caja.hidden = true; return; }
     const completo = caja.dataset.campana === "completa";
     const hayMeta = typeof c.meta === "number" && c.meta > 0;
     const p = hayMeta ? Math.min(100, Math.round(((c.recaudado || 0) / c.meta) * 100)) : 0;
     const dato = (t, v) => (v ? `<div><dt>${t}</dt><dd>${esc(v)}</dd></div>` : "");
+    const conCartelera = completo && hayMeta && cartel;
     caja.innerHTML = `
       <p class="antetitulo">Una necesidad concreta</p>
       <h2>${esc(c.titulo)}</h2>
       <p class="entradilla">${esc(c.descripcion)}</p>
-      ${hayMeta ? `<div class="progreso" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="Avance de la campaña"><i></i></div>
-        <p><strong>${dinero(c.recaudado || 0)}</strong> de ${dinero(c.meta)} · ${p}%</p>`
+      ${conCartelera ? pintaCartelera(c)
+      : hayMeta ? `<div class="progreso" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-label="Avance de la campaña"><i></i></div>
+        <p><strong>${dinero(c.recaudado || 0)}</strong> de ${dinero(c.meta)} · ${p}%${cartel && cartel.nombre ? ` · Meta para la ${esc(cartel.nombre)}` : ""}</p>`
       : `<p class="nota" style="color:#cfc5ad">La meta se publicará cuando esté calculada con costos reales.</p>`}
       ${(c.necesidades || []).length ? `<ul class="necesidades">${c.necesidades.map((n) => `<li><b>${esc(n.nombre)}</b>${esc(n.detalle)}</li>`).join("")}</ul>` : ""}
       <dl class="datos">${dato("Destino de los fondos", c.destino)}
         ${completo ? dato("Fecha límite", c.fechaLimite) + dato("Responsable", c.responsable) + dato("Si sobra dinero", c.siSobra) + dato("Si no se alcanza la meta", c.siNoSeAlcanza) : ""}</dl>
       ${completo ? "" : '<div class="botones" style="margin-top:24px"><a class="btn btn-oro" href="apoyanos.html#donar">Apoyar la rondalla</a><a class="btn btn-linea" href="apoyanos.html#transparencia">Cómo usamos los fondos</a></div>'}`;
-    if (hayMeta) requestAnimationFrame(() => setTimeout(() => $(".progreso i", caja).style.setProperty("--p", p + "%"), 200));
+    if (conCartelera) activaCartelera(caja, c);
+    else if (hayMeta) requestAnimationFrame(() => setTimeout(() => $(".progreso i", caja).style.setProperty("--p", p + "%"), 200));
   });
 
   /* ---------- Donación ---------- */
@@ -472,6 +567,7 @@
       $("#campo-otro").hidden = fDonar.elements.monto.value !== "otro";
       const m = monto();
       resumen.textContent = m > 0 ? `Tu aportación: ${dinero(m)} ${fDonar.elements.frecuencia.value === "mensual" ? "cada mes" : "una sola vez"}.` : "Escribe el monto que deseas aportar.";
+      previsualiza(m);
     };
     fDonar.addEventListener("input", refresca); refresca();
     fDonar.addEventListener("submit", (e) => {
