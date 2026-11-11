@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es-PR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Panel de campaña — Rondalla Escolar José N. Colón González</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0d0b08">
+  <link rel="icon" href="assets/logo-192.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="panel">
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <div id="cabecera"></div>
+
+  <main id="contenido">
+    <div class="pagina-cabeza"><div class="contenedor">
+      <p class="antetitulo">Uso del comité</p>
+      <h1>Panel de campaña</h1>
+      <p>Cambia la meta, registra las aportaciones recibidas y publica la cartelera de Apóyanos.</p>
+    </div></div>
+
+    <section class="seccion">
+      <div class="contenedor" style="display:grid;gap:28px">
+
+        <div class="panel-cifras" id="panel-cifras" aria-live="polite"></div>
+
+        <div class="rejilla-2" style="align-items:start">
+          <form class="tarjeta" id="form-meta" novalidate>
+            <h2 style="font-size:1.5rem">Meta de la campaña</h2>
+            <div class="campo">
+              <label for="p-nombre">Nombre de la campaña</label>
+              <input type="text" id="p-nombre" maxlength="80">
+            </div>
+            <div class="panel-fila">
+              <div class="campo">
+                <label for="p-meta">Meta (en dólares)</label>
+                <input type="number" id="p-meta" min="1" step="1" inputmode="decimal">
+              </div>
+              <div class="campo">
+                <label for="p-fecha">Fecha de la actividad</label>
+                <input type="date" id="p-fecha">
+              </div>
+            </div>
+            <p class="nota">Los cambios se guardan solos en este dispositivo.</p>
+          </form>
+
+          <form class="tarjeta" id="form-aporte" novalidate>
+            <h2 style="font-size:1.5rem">Registrar una aportación</h2>
+            <div class="panel-fila">
+              <div class="campo">
+                <label for="a-monto">Monto recibido (en dólares)</label>
+                <input type="number" id="a-monto" min="0.01" step="0.01" inputmode="decimal" required>
+              </div>
+              <div class="campo">
+                <label for="a-fecha">Fecha</label>
+                <input type="date" id="a-fecha">
+              </div>
+            </div>
+            <div class="campo">
+              <label for="a-nombre">Nombre a publicar (opcional)</label>
+              <input type="text" id="a-nombre" maxlength="60" placeholder="Déjalo vacío para «Aportación anónima»">
+            </div>
+            <p class="nota">Escribe el nombre solo si la persona autorizó que se publique. No anotes aquí datos privados: este archivo es público.</p>
+            <button class="btn btn-oro" type="submit" style="width:100%">Añadir aportación</button>
+          </form>
+        </div>
+
+        <div class="tarjeta">
+          <h2 style="font-size:1.5rem">Aportaciones registradas</h2>
+          <div id="panel-lista"></div>
+        </div>
+
+        <div class="tarjeta">
+          <h2 style="font-size:1.5rem">Publicar en el sitio</h2>
+          <p class="panel-aviso" id="panel-estado" aria-live="polite"></p>
+          <ol>
+            <li>Pulsa <b>Descargar campana.js</b>.</li>
+            <li>Reemplaza con ese archivo el que está en la carpeta <b>js</b> del sitio.</li>
+            <li>Sube el archivo <b>js/campana.js</b> a GitHub. En uno o dos minutos todos verán la cartelera actualizada.</li>
+          </ol>
+          <div class="botones">
+            <button class="btn btn-oro" type="button" id="btn-descargar">Descargar campana.js</button>
+            <button class="btn btn-oscuro" type="button" id="btn-copiar">Copiar el contenido</button>
+            <a class="btn btn-linea" href="apoyanos.html">Ver la cartelera</a>
+            <button class="btn btn-linea" type="button" id="btn-restablecer">Descartar mis cambios</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="pie"></div>
+  <script src="js/data.js"></script>
+  <script src="js/campana.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/panel.js"></script>
+</body>
+</html>
