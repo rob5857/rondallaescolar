@@ -142,8 +142,20 @@
 
     /* AUSPICIADORES aprobados por la escuela.
        { nombre, nivel: "Oro"|"Plata"|"Bronce"|"Amigo"|"En especie", logo: "assets/auspiciadores/x.png",
+         promo: "anuncio que se abre grande al tocar la ficha", promoAlt: "descripción del anuncio",
          categoria, municipio, descripcion, enlace } */
-    auspiciadores: [],
+    auspiciadores: [
+      {
+        nombre: "Desarrollos Industriales",
+        nivel: "Oro",
+        promo: "assets/auspiciadores/desarrollos-industriales.jpg",
+        promoAlt: "Anuncio de Desarrollos Industriales: equipo de emergencia para restaurar daños por incendio, humo e inundaciones. Servicio de emergencia 24/7. Teléfono +1 (973) 392-0478. Página web desarrollosindustrialespr.com",
+        categoria: "Restauración de daños por incendio, humo e inundaciones",
+        municipio: "",
+        descripcion: "Equipo de emergencia para restaurar propiedades afectadas por incendio, humo e inundaciones.",
+        enlace: "https://www.desarrollosindustrialespr.com/"
+      }
+    ],
 
     /* ÁLBUMES. Solo material con autorización. */
     albumes: [

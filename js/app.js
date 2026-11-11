@@ -584,17 +584,29 @@
 
   /* ---------- Auspiciadores ---------- */
   const aus = D.auspiciadores || [];
-  const logoAus = (a) => {
+  const logoAus = (a, i) => {
+    // Con propaganda: la ficha abre el anuncio completo; el anuncio enlaza al sitio del auspiciador.
+    if (a.promo) return `<button type="button" class="logo-aus promo${a.nivel === "Oro" ? " oro" : ""}" data-aus="${i}" aria-label="Ver el anuncio completo de ${esc(a.nombre)}">
+      <img src="${esc(a.promo)}" alt="" loading="lazy"><span class="promo-pie"><b>${esc(a.nombre)}</b><i>Auspiciador ${esc(a.nivel)} · Ver anuncio</i></span></button>`;
     const dentro = a.logo ? `<img src="${esc(a.logo)}" alt="${esc(a.nombre)}" loading="lazy">` : `<strong>${esc(a.nombre)}</strong>`;
     return a.enlace ? `<a class="logo-aus" href="${esc(a.enlace)}" rel="sponsored noopener" target="_blank" title="${esc(a.nombre)} (enlace patrocinado)">${dentro}</a>` : `<div class="logo-aus">${dentro}</div>`;
   };
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-aus]"); if (!b) return;
+    const a = aus[Number(b.dataset.aus)]; if (!a) return;
+    const alt = a.promoAlt || "Anuncio de " + a.nombre;
+    const img = `<img src="${esc(a.promo)}" alt="${esc(alt)}">`;
+    dialogo(`${a.enlace ? `<a class="promo-enlace" href="${esc(a.enlace)}" rel="sponsored noopener" target="_blank" title="Ir al sitio de ${esc(a.nombre)} (enlace patrocinado)">${img}</a>` : img}
+      <p class="promo-barra"><span><b>${esc(a.nombre)}</b> · Auspiciador ${esc(a.nivel)}</span>
+      ${a.enlace ? `<a class="btn btn-oro btn-chico" href="${esc(a.enlace)}" rel="sponsored noopener" target="_blank">Visitar su página web</a><small>Enlace patrocinado · toca la imagen o el botón</small>` : ""}</p>`, "visor visor-promo");
+  });
   const libre = '<a class="logo-aus libre" href="apoyanos.html#auspiciadores">Tu comercio aquí</a>';
   const logosInicio = $("#logos-aus");
-  if (logosInicio) logosInicio.innerHTML = aus.length ? aus.slice(0, 8).map(logoAus).join("") : libre.repeat(4);
+  if (logosInicio) logosInicio.innerHTML = aus.length ? aus.slice(0, 8).map(logoAus).join("") + libre.repeat(Math.max(0, 3 - aus.length)) : libre.repeat(4);
   const directorio = $("#directorio-aus");
   if (directorio) {
     directorio.innerHTML = aus.length
-      ? aus.map((a) => `<article class="tarjeta">${logoAus(a)}<p style="margin-top:14px"><span class="etiqueta">${esc(a.nivel)}</span></p>
+      ? aus.map((a, i) => `<article class="tarjeta${a.nivel === "Oro" ? " nivel oro" : ""}">${logoAus(a, i)}<p style="margin-top:14px"><span class="etiqueta">${esc(a.nivel)}</span></p>
           <h3>${esc(a.nombre)}</h3><p class="nota">${esc([a.categoria, a.municipio].filter(Boolean).join(" · "))}</p><p>${esc(a.descripcion)}</p>
           ${a.enlace ? `<p class="nota"><a href="${esc(a.enlace)}" rel="sponsored noopener" target="_blank">Visitar sitio</a> · enlace patrocinado</p>` : ""}</article>`).join("")
       : libre.repeat(3);
