@@ -108,4 +108,23 @@ window.RONDALLA_CAMPANA = ${JSON.stringify(datos, null, 2)};
   });
 
   llena(); pinta();
+
+  /* Acceso de demostración. La contraseña está a la vista en este archivo:
+     sirve para mostrar el funcionamiento, no como seguridad real. */
+  const CLAVE_DEMO = "jncg2026", SESION = "rondalla-panel";
+  const dentro = () => { try { return sessionStorage.getItem(SESION) === "1"; } catch { return false; } };
+  const muestra = (ok) => { $("#panel-acceso").hidden = ok; $("#panel-contenido").hidden = !ok; };
+  muestra(dentro());
+  $("#form-acceso").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const campo = $("#clave"), ok = campo.value === CLAVE_DEMO;
+    $("#clave-error").hidden = ok;
+    if (!ok) { campo.select(); return; }
+    try { sessionStorage.setItem(SESION, "1"); } catch { /* sin almacenamiento */ }
+    campo.value = ""; muestra(true);
+  });
+  $("#btn-salir").addEventListener("click", () => {
+    try { sessionStorage.removeItem(SESION); } catch { /* nada */ }
+    muestra(false); $("#clave").focus();
+  });
 })();

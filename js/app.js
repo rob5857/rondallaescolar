@@ -61,7 +61,8 @@
           <li><a href="apoyanos.html#donar">Apoyar la rondalla</a></li>
           <li><a href="apoyanos.html#auspiciadores">Ser auspiciador</a></li>
           <li><a href="apoyanos.html#transparencia">Transparencia</a></li>
-          <li><a href="contacto.html">Invítanos a tu actividad</a></li></ul></div>
+          <li><a href="contacto.html">Invítanos a tu actividad</a></li>
+          <li><a href="panel.html">Panel del comité 🔒</a></li></ul></div>
       </div>
       <p class="legal">© ${new Date().getFullYear()} Rondalla Escolar José N. Colón González. Las fotografías y videos se publican únicamente con autorización. Este sitio no almacena datos de tarjetas ni comparte información de estudiantes o familias.</p>
     </div></footer>`;
