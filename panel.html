@@ -23,8 +23,24 @@
       <p>Cambia la meta, registra las aportaciones recibidas y publica la cartelera de Apóyanos.</p>
     </div></div>
 
-    <section class="seccion">
+    <section class="seccion" id="panel-acceso">
+      <div class="contenedor" style="max-width:480px">
+        <form class="tarjeta" id="form-acceso" novalidate>
+          <h2 style="font-size:1.5rem">Acceso del comité</h2>
+          <div class="campo">
+            <label for="clave">Contraseña</label>
+            <input type="password" id="clave" autocomplete="current-password" required>
+          </div>
+          <p class="nota" id="clave-error" role="alert" style="color:var(--mal)" hidden>Contraseña incorrecta. Inténtalo de nuevo.</p>
+          <button class="btn btn-oro" type="submit" style="width:100%">Entrar</button>
+          <p class="nota" style="margin-top:14px">Acceso de demostración.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="seccion" id="panel-contenido" hidden>
       <div class="contenedor" style="display:grid;gap:28px">
+        <p style="margin:0;text-align:right"><button class="btn btn-linea btn-chico" type="button" id="btn-salir">Cerrar sesión</button></p>
 
         <div class="panel-cifras" id="panel-cifras" aria-live="polite"></div>
 
